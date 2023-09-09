@@ -2,6 +2,10 @@
     "name": "@lilicas/bot",
     "version": "1.0.0",
     "type": "module",
+    "scripts": {
+      "start": "node .",
+      "dev": "nodemon -r dotenv/config ."
+    },
     "dependencies": {
         "dayjs": "^1.11.9",
         "dotenv": "^16.3.1",
