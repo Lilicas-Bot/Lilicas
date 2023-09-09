@@ -1,0 +1,10 @@
+{
+  "name": "lilicas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Lilicas-Bot/Lilicas",
+  "author": "Lilicas Team",
+  "license": "MPL-2.0",
+  "workspaces": ["apps/*"],
+  "private": true
+}
