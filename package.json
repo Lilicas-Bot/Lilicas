@@ -5,12 +5,16 @@
   "repository": "https://github.com/Lilicas-Bot/Lilicas",
   "author": "Lilicas Team",
   "license": "MPL-2.0",
+  "scripts": {
+    "db:gen": "prisma generate"
+  },
   "workspaces": [
     "apps/*"
   ],
   "private": true,
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
     "prisma": "^5.2.0"
   }
 }
