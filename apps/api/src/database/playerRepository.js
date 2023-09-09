@@ -7,7 +7,7 @@ export default {
    * @returns {import('@prisma/client').Player}
    */
   getOrCreate: async (id) => {
-    const player = await prisma.player.findFirst({ select: { discord_id: id } })
+    const player = await prisma.player.findFirst({ where: { discord_id: id } })
     if (player) {
       return player
     }
@@ -23,11 +23,10 @@ export default {
    */
   update: async (id, data) => {
     return await prisma.player.update({
-      select: {
+      where: {
         discord_id: id
       },
       data
     })
   }
-
 }

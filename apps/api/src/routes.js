@@ -1,8 +1,9 @@
-import { Router } from 'express'
+import { Router, json } from 'express'
 import playerController from './controllers/playerController.js'
 
 const router = Router()
 
-router.use('/player/:id', playerController.get)
+router.use(json())
+router.use('/players', playerController)
 
 export default router

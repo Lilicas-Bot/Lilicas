@@ -3,9 +3,15 @@ import router from './src/routes.js'
 import prisma from './src/database/index.js'
 
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 
-await prisma.$connect().then(() => console.log("É MLK?")).catch(error => console.error("n foi mlk", error))
+await prisma.$connect()
+    .then(() => {
+        console.log('Connected to database')
+    }).catch(error => {
+        console.error('Failed to connect to database', error)
+    })
 
 app.use(router)
+
 app.listen(port, () => console.log('Listening on', port))
