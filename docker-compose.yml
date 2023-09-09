@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+    mongo:
+        image: mongo
+        container_name: lilicas-mongo
+        ports:
+        - "27017:27017"
+        volumes:
+        - ./data/db:/data/db
+        networks:
+            - lilicas-local
+
+    redis:
+        image: redis
+        container_name: lilicas-redis
+        ports:
+        - "6379:6379"
+        networks:
+            - lilicas-local
+
+    # lilicas-api:
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #         args:
+    #             - BUILD_CONTEXT=api
+    #     container_name: lilicas-api
+    #     ports:
+    #     - "3000:3000"
+    #     depends_on:
+    #     - mongo
+    #     - redis
+    #     networks:
+    #         - lilicas-local
+    
+    # lilicas-web:
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #         args:
+    #             - BUILD_CONTEXT=web
+    #     container_name: lilicas-web
+    #     ports:
+    #     - "8080:8080"
+    #     depends_on:
+    #     - lilicas-api
+    #     networks:
+    #         - lilicas-local
+    
+    # lilicas-bot:
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #         args:
+    #             - BUILD_CONTEXT=bot
+    #     container_name: lilicas-bot
+    #     depends_on:
+    #     - lilicas-api
+    #     networks:
+    #         - lilicas-local
+
+networks:
+    lilicas-local:
+        driver: bridge
