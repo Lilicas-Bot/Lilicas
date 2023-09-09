@@ -4,9 +4,9 @@ import { Router } from 'express'
 const route = Router()
 
 /**
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 route.get('/:id', async (req, res) => {
   const discordId = req.params.id
@@ -15,9 +15,9 @@ route.get('/:id', async (req, res) => {
 })
 
 /**
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 route.put('/:id', async (req, res) => {
   const discordId = req.params.id

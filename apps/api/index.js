@@ -6,11 +6,11 @@ const app = express()
 const port = process.env.PORT || 3000
 
 await prisma.$connect()
-    .then(() => {
-        console.log('Connected to database')
-    }).catch(error => {
-        console.error('Failed to connect to database', error)
-    })
+  .then(() => {
+    console.log('Connected to database')
+  }).catch(error => {
+    console.error('Failed to connect to database', error)
+  })
 
 app.use(router)
 

@@ -2,8 +2,8 @@ import prisma from './index.js'
 
 export default {
   /**
-   * 
-   * @param {string} id 
+   *
+   * @param {string} id
    * @returns {import('@prisma/client').Player}
    */
   getOrCreate: async (id) => {
@@ -16,9 +16,9 @@ export default {
   },
 
   /**
-   * 
-   * @param {string} id 
-   * @param {import('@prisma/client').Player} data 
+   *
+   * @param {string} id
+   * @param {import('@prisma/client').Player} data
    * @returns {Promise<void>}
    */
   update: async (id, data) => {

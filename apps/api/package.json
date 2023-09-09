@@ -4,7 +4,7 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "start": "node -r dotenv/config .",
+        "start": "node .",
         "dev": "nodemon -r dotenv/config ."
     },
     "dependencies": {
