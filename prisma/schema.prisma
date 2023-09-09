@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  discord_id String
+  money      Int      @default(0)
+  stars  Int      @default(0)  
+}
