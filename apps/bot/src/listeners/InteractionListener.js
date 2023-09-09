@@ -10,7 +10,6 @@ export default class InteractionListener extends Listener {
    * @param {import('eris').Interaction} interaction
    */
   async run (interaction) {
-    console.log(interaction)
     const customInteraction = this.client.interactions.get(interaction.data.custom_id)
     if (!customInteraction) return
 
