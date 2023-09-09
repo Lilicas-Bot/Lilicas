@@ -1,5 +1,12 @@
 {
-    "name": "@lilicas/bot",
-    "version": "1.0.0",
-    "type": "module"
+  "name": "@lilicas/bot",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon -r dotenv/config ."
+  },
+  "dependencies": {
+    "eris": "^0.17.2"
+  }
 }
