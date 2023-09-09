@@ -20,7 +20,11 @@ services:
             - lilicas-local
 
     # lilicas-api:
-    #     build: ./apps/api
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #         args:
+    #             - BUILD_CONTEXT=api
     #     container_name: lilicas-api
     #     ports:
     #     - "3000:3000"
@@ -31,7 +35,11 @@ services:
     #         - lilicas-local
     
     # lilicas-web:
-    #     build: ./apps/web
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #         args:
+    #             - BUILD_CONTEXT=web
     #     container_name: lilicas-web
     #     ports:
     #     - "8080:8080"
@@ -41,7 +49,11 @@ services:
     #         - lilicas-local
     
     # lilicas-bot:
-    #     build: ./apps/bot
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #         args:
+    #             - BUILD_CONTEXT=bot
     #     container_name: lilicas-bot
     #     depends_on:
     #     - lilicas-api
