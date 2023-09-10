@@ -1,4 +1,5 @@
 import playerRepository from '../database/playerRepository.js'
+import isDataValid from '../utils/isDataValid.js'
 import { Router } from 'express'
 
 const route = Router()
@@ -10,6 +11,13 @@ const route = Router()
  */
 route.get('/:id', async (req, res) => {
   const discordId = req.params.id
+  const isValid = await isDataValid(discordId, {}, [])
+
+  if (isValid.error) {
+    res.status(400).json(isValid)
+    return
+  }
+
   const player = await playerRepository.getOrCreate(discordId)
   res.json(player).status(200)
 })
@@ -21,14 +29,16 @@ route.get('/:id', async (req, res) => {
  */
 route.put('/:id', async (req, res) => {
   const discordId = req.params.id
+  const isValid = await isDataValid(discordId, req.body, ['stars', 'money'])
 
-  if (Object.keys(req.body).length === 0) {
-    return res.status(400).json({ error: 'No data provided' })
+  if (isValid.error) {
+    res.status(400).json(isValid)
+    return
   }
 
-  await playerRepository.update(discordId, req.body)
+  const data = await playerRepository.update(discordId, req.body)
 
-  res.status(200)
+  res.json(data).status(200)
 })
 
 export default route

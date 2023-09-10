@@ -8,6 +8,7 @@ export default {
    */
   getOrCreate: async (id) => {
     const player = await prisma.player.findFirst({ where: { discord_id: id } })
+
     if (player) {
       return player
     }
@@ -22,11 +23,6 @@ export default {
    * @returns {Promise<void>}
    */
   update: async (id, data) => {
-    return await prisma.player.update({
-      where: {
-        discord_id: id
-      },
-      data
-    })
+    return await prisma.player.update({ where: { discord_id: id }, data })
   }
 }
