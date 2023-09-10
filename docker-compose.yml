@@ -32,25 +32,25 @@ services:
       - PGADMIN_DEFAULT_EMAIL=local@email.com
       - PGADMIN_DEFAULT_PASSWORD=123
     volumes:
-      - data/pgadmin:/var/lib/pgadmin
+      - ./data/pgadmin:/var/lib/pgadmin
 
-  # lilicas-api:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #     args:
-  #       - BUILD_CONTEXT=api
-  #   container_name: lilicas-api
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   environment:
-  #     - DATABASE_URI=postgres://lilicas:lilicas@postgres:5432/lilicas
-  #     - REDIS_URI=redis://redis:6379
-  #   networks:
-  #     - lilicas-local
+  lilicas-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BUILD_CONTEXT=api
+    container_name: lilicas-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - DATABASE_URI=postgres://lilicas:lilicas@postgres:5432/lilicas
+      - REDIS_URI=redis://redis:6379
+    networks:
+      - lilicas-local
 
   # lilicas-web:
   #   build:
