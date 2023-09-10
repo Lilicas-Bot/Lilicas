@@ -1,3 +1,4 @@
+import { CommandInteraction, ComponentInteraction } from 'eris'
 import { Listener } from '../structures/index.js'
 
 export default class InteractionListener extends Listener {
@@ -10,9 +11,16 @@ export default class InteractionListener extends Listener {
    * @param {import('eris').Interaction} interaction
    */
   async run (interaction) {
-    const customInteraction = this.client.interactions.get(interaction.data.custom_id)
-    if (!customInteraction) return
+    if (interaction instanceof CommandInteraction) {
+      const command = this.client.commands.get(interaction.data.name)
+      if (!command) return
 
-    await customInteraction.run(interaction)
+      command.run(interaction)
+    } else if (interaction instanceof ComponentInteraction) {
+      const customInteraction = this.client.interactions.get(interaction.data.custom_id)
+      if (!customInteraction) return
+
+      interaction.run(interaction)
+    }
   }
 }

@@ -5,6 +5,7 @@ export default class LilicasClient extends Client {
   constructor (token, options) {
     super(token, { ...options })
 
+    this.commands = new Map()
     this.interactions = new Map()
   }
 

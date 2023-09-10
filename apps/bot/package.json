@@ -1,15 +1,14 @@
 {
-    "name": "@lilicas/bot",
-    "version": "1.0.0",
-    "type": "module",
-    "scripts": {
-      "start": "node .",
-      "dev": "nodemon -r dotenv/config ."
-    },
-    "dependencies": {
-        "dayjs": "^1.11.9",
-        "dotenv": "^16.3.1",
-        "eris": "^0.17.2",
-        "signale": "^1.4.0"
-    }
+  "name": "@lilicas/bot",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon -r dotenv/config . dotenv_config_path=../../.env"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.9",
+    "eris": "^0.17.2",
+    "signale": "^1.4.0"
+  }
 }
