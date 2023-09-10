@@ -11,5 +11,9 @@ export default class ReadyListener extends Listener {
 
   async run () {
     console.log('Logged in')
+
+    for (const command of this.client.commands.values()) {
+      await this.client.createGuildCommand(process.env.GUILD_ID, command.options)
+    }
   }
 }
