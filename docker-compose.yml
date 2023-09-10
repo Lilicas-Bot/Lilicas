@@ -1,21 +1,17 @@
 version: "3.8"
 
 services:
-  # fix replica set for mongo neded for prisma
-  mongo:
-    image: mongo
-    container_name: lilicas-mongo-main
+  postgres:
+    image: postgres
+    container_name: lilicas-postgres
     ports:
-      - "27017:27017"
-    volumes:
-      - ./data/db:/data/db
+      - "5432:5432"
     networks:
       - lilicas-local
-    healthcheck:
-      test: echo 'rs.initiate().ok' | mongo mongo:27017/lilicas --quiet
-      interval: 10s
-      start_period: 10s
-    command: [ "--replSet", "dbrs", "--bind_ip_all" ]
+    environment:
+      - POSTGRES_USER=lilicas
+      - POSTGRES_PASSWORD=lilicas
+      - POSTGRES_DB=lilicas
 
   redis:
     image: redis
@@ -25,23 +21,36 @@ services:
     networks:
       - lilicas-local
 
-  lilicas-api:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        - BUILD_CONTEXT=api
-    container_name: lilicas-api
+  pg-admin:
+    image: dpage/pgadmin4
+    container_name: lilicas-pg-admin
     ports:
-      - "3000:3000"
-    depends_on:
-      - mongo
-      - redis
-    environment:
-      - DATABASE_URI=mongodb://mongo:27017/lilicas
-      - REDIS_URI=redis://redis:6379
+      - "5050:80"
     networks:
       - lilicas-local
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=local@email.com
+      - PGADMIN_DEFAULT_PASSWORD=123
+    volumes:
+      - data/pgadmin:/var/lib/pgadmin
+
+  # lilicas-api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     args:
+  #       - BUILD_CONTEXT=api
+  #   container_name: lilicas-api
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   environment:
+  #     - DATABASE_URI=postgres://lilicas:lilicas@postgres:5432/lilicas
+  #     - REDIS_URI=redis://redis:6379
+  #   networks:
+  #     - lilicas-local
 
   # lilicas-web:
   #   build:

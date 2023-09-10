@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URI")
 }
 
 model Player {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  discord_id String
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  discord_id String @unique
   money      Int    @default(0)
   stars      Int    @default(0)
 }
