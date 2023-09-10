@@ -7,7 +7,7 @@
  */
 const isDataValid = async (discordId, body, validKeys) => {
   // TODO: cache discord user data
-  // TODO: create request cache
+  // TODO: create request handler
   const user = await fetch('https://discord.com/api/v10/users/' + discordId, {
     headers: {
       Authorization: `Bot ${process.env.TOKEN}`
