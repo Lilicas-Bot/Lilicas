@@ -9,6 +9,7 @@
   "dependencies": {
     "dayjs": "^1.11.9",
     "eris": "^0.17.2",
-    "signale": "^1.4.0"
+    "signale": "^1.4.0",
+    "@lilicas/utils": "*"
   }
 }

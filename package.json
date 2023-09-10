@@ -12,7 +12,8 @@
     "lint": "eslint ./apps"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "private": true,
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { loadDirectory } from '../utils/FileUtils.js'
+import { loadDirectory } from '@lilicas/utils'
 
 export default class Loader {
   /**
