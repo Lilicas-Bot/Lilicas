@@ -2,6 +2,7 @@
     "recommendations": [
         "prisma.prisma",
         "editorconfig.editorconfig",
-        "rangav.vscode-thunder-client"
+        "rangav.vscode-thunder-client",
+        "ms-azuretools.vscode-docker"
     ]
 }

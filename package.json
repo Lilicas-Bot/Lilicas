@@ -9,6 +9,8 @@
     "db:gen": "prisma generate",
     "db:dev": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
+    "compose:dev": "docker compose --profile dev up -d",
+    "compose:prod": "docker compose --profile production up -d --build",
     "lint": "eslint ./apps"
   },
   "workspaces": [

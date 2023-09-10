@@ -3,6 +3,9 @@ version: "3.8"
 services:
   postgres:
     image: postgres
+    profiles:
+      - dev
+      - production
     container_name: lilicas-postgres
     ports:
       - "5432:5432"
@@ -15,6 +18,9 @@ services:
 
   redis:
     image: redis
+    profiles:
+      - dev
+      - production
     container_name: lilicas-redis
     ports:
       - "6379:6379"
@@ -23,6 +29,8 @@ services:
 
   pg-admin:
     image: dpage/pgadmin4
+    profiles:
+      - dev
     container_name: lilicas-pg-admin
     ports:
       - "5050:80"
@@ -35,6 +43,8 @@ services:
       - ./data/pgadmin:/var/lib/pgadmin
 
   lilicas-api:
+    profiles:
+      - production
     build:
       context: .
       dockerfile: Dockerfile
@@ -53,6 +63,8 @@ services:
       - lilicas-local
 
   # lilicas-web:
+  #   profiles:
+  #     - production
   #   build:
   #     context: .
   #     dockerfile: Dockerfile
@@ -67,6 +79,8 @@ services:
   #     - lilicas-local
 
   # lilicas-bot:
+  #   profiles:
+  #     - production
   #   build:
   #     context: .
   #     dockerfile: Dockerfile
