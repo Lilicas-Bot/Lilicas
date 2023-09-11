@@ -2,8 +2,8 @@ import prisma from './index.js'
 
 /**
  *
- * @param {string} id
- * @returns {import('@prisma/client').Player}
+ * @param {string} id Discord user id
+ * @returns {import('@prisma/client').Player} Player
  */
 const getOrCreate = async (id) => {
   const player = await prisma.player.findFirst({ where: { discordId: id } })
@@ -17,9 +17,9 @@ const getOrCreate = async (id) => {
 
 /**
  *
- * @param {string} id
- * @param {import('@prisma/client').Player} data
- * @returns {Promise<void>}
+ * @param {string} id Discord user id
+ * @param {import('@prisma/client').Player} data Partial player data
+ * @returns {Promise<import('@prisma/client').Player>} Updated player
  */
 const update = async (id, data) => {
   const { discordId } = await getOrCreate(id)
