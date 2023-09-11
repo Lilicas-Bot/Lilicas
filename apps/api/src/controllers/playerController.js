@@ -13,7 +13,7 @@ route.get('/:id', isDataValid([]), async (req, res) => {
   const discordId = req.params.id
 
   const player = await playerRepository.getOrCreate(discordId)
-  res.json(player).status(200)
+  res.status(200).json(player)
 })
 
 /**
@@ -26,7 +26,7 @@ route.put('/:id', isDataValid(['stars', 'money']), async (req, res) => {
 
   const data = await playerRepository.update(discordId, req.body)
 
-  res.json(data).status(200)
+  res.status(200).json(data)
 })
 
 export default route

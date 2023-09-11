@@ -26,7 +26,7 @@ const isDataValid = (validKeys) => async (req, res, next) => {
 
   const invalidKeys = Object.keys(req.body).filter(key => !validKeys.includes(key))
 
-  if (invalidKeys) {
+  if (invalidKeys.length > 0) {
     res
       .status(400)
       .json({ error: `Invalid keys: ${invalidKeys.join(', ')}` })
