@@ -14,7 +14,9 @@ const isDataValid = async (discordId, body, validKeys) => {
     }
   }).then(res => res.json())
 
-  if (user.message === 'Unknown User') {
+  const code = user.code
+
+  if (code === 10013 || code === 0) {
     return { error: 'Invalid discord id' }
   }
 
