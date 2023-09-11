@@ -15,6 +15,8 @@ services:
       - POSTGRES_USER=lilicas
       - POSTGRES_PASSWORD=lilicas
       - POSTGRES_DB=lilicas
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
 
   redis:
     image: redis

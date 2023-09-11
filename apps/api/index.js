@@ -5,6 +5,11 @@ import prisma from './src/database/index.js'
 const app = express()
 const port = process.env.PORT || 3000
 
+if (!process.env.DATABASE_URL && !process.env.TOKEN) {
+  console.error('Environment variables not set')
+  process.exit(1)
+}
+
 await prisma.$connect()
   .then(() => {
     console.log('Connected to database')
