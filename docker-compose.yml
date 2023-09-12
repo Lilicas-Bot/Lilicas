@@ -41,8 +41,6 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=local@email.com
       - PGADMIN_DEFAULT_PASSWORD=123
-    volumes:
-      - ./data/pgadmin:/var/lib/pgadmin
 
   lilicas-api:
     profiles:

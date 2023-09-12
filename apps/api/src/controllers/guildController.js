@@ -1,4 +1,4 @@
-import playerRepository from '../database/playerRepository.js'
+import guildRepository from '../database/guildRepository.js'
 import isDataValid from '../middlewares/isDataValid.js'
 import { Router } from 'express'
 
@@ -12,7 +12,7 @@ const route = Router()
 route.get('/:id', isDataValid([]), async (req, res) => {
   const discordId = req.params.id
 
-  const player = await playerRepository.getOrCreate(discordId)
+  const player = await guildRepository.getOrCreate(discordId)
   res.status(200).json(player)
 })
 
@@ -35,7 +35,7 @@ route.put('/:id', isDataValid([
 ]), async (req, res) => {
   const discordId = req.params.id
 
-  const data = await playerRepository.update(discordId, req.body)
+  const data = await guildRepository.update(discordId, req.body)
 
   res.status(200).json(data)
 })

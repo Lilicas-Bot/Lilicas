@@ -35,9 +35,9 @@ model Item {
   icon     String @map("icon")
   quantity Int    @default(1) @map("quantity")
   guildId  String @map("guild_id") @db.Uuid
-  Guild    Guild  @relation(fields: [guildId], references: [id])
+  guild    Guild[]
   heroId   String @map("hero_id") @db.Uuid
-  Hero     Hero   @relation(fields: [heroId], references: [id])
+  hero     Hero[]
 }
 
 model Hero {
@@ -53,10 +53,9 @@ model Hero {
   luck        Int     @default(1) @map("luck")
   available   Boolean @default(true) @map("available")
   guildId     String  @map("guild_id") @db.Uuid
-  Guild       Guild   @relation(fields: [guildId], references: [id])
-  partyId     String  @map("party_id") @db.Uuid
-  Party       Party   @relation(fields: [partyId], references: [id])
+  guild       Guild   @relation(fields: [guildId], references: [id])
   itens       Item[]
+  party       Party[]
 }
 
 model Party {
@@ -64,7 +63,7 @@ model Party {
   heroes     Hero[]
   adventures Adventure[]
   guildId    String      @map("guild_id") @db.Uuid
-  Guild      Guild       @relation(fields: [guildId], references: [id])
+  guild      Guild       @relation(fields: [guildId], references: [id])
 }
 
 model Adventure {
@@ -72,7 +71,7 @@ model Adventure {
   createdAt  DateTime  @default(now()) @map("created_at")
   finishedAt DateTime? @map("finished_at")
   guildId    String    @map("guild_id") @db.Uuid
-  Guild      Guild     @relation(fields: [guildId], references: [id])
+  guild      Guild     @relation(fields: [guildId], references: [id])
   partyId    String    @map("party_id") @db.Uuid
-  Party      Party     @relation(fields: [partyId], references: [id])
+  party      Party     @relation(fields: [partyId], references: [id])
 }
