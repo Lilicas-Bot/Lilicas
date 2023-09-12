@@ -1,6 +1,4 @@
-import { request } from 'undici'
-
-export default class RequestUtils {
+export default class RequestClient {
   constructor (baseUrl, headers) {
     this.baseUrl = baseUrl
 
@@ -30,7 +28,7 @@ export default class RequestUtils {
   }
 
   prepareRequest (method, url, params) {
-    return request(`${this.baseUrl}${url}`, {
+    return fetch(`${this.baseUrl}${url}`, {
       method,
       body: JSON.stringify(params),
       headers: this.headers

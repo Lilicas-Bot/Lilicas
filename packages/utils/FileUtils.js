@@ -1,7 +1,7 @@
 import { readdir, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
-export const loadDirectory = async (path) => {
+const loadDirectory = async (path) => {
   const files = await readdir(path)
     .catch(() => [])
 
@@ -19,4 +19,8 @@ export const loadDirectory = async (path) => {
 
   return Promise.all(promisedFiles)
     .then((arr) => arr.flat())
+}
+
+export {
+  loadDirectory
 }
