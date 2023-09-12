@@ -1,4 +1,15 @@
+/**
+ * @typedef {object} headers
+ * @property {string} Content-Type
+ * @property {string} Authorization
+ */
+
 export default class RequestClient {
+  /**
+   * Creates an instance of request client.
+   * @param {string} baseUrl api base url
+   * @param {headers} headers api headers
+   */
   constructor (baseUrl, headers) {
     this.baseUrl = baseUrl
 
@@ -32,6 +43,6 @@ export default class RequestClient {
       method,
       body: JSON.stringify(params),
       headers: this.headers
-    })
+    }).then(res => res.json())
   }
 }

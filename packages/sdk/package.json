@@ -1,0 +1,10 @@
+{
+  "name": "@lilicas/sdk",
+  "description": "simple sdk for lilicas api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "@lilicas/utils": "*"
+  }
+}
