@@ -6,13 +6,13 @@ import prisma from './index.js'
  * @returns {import('@prisma/client').Player} Player
  */
 const getOrCreate = async (id) => {
-  const player = await prisma.player.findFirst({ where: { discordId: id } })
+  const player = await prisma.guild.findFirst({ where: { discordId: id } })
 
   if (player) {
     return player
   }
 
-  return await prisma.player.create({ data: { discordId: id } })
+  return await prisma.guild.create({ data: { discordId: id } })
 }
 
 /**
@@ -23,7 +23,7 @@ const getOrCreate = async (id) => {
  */
 const update = async (id, data) => {
   const { discordId } = await getOrCreate(id)
-  return await prisma.player.update({ where: { discordId }, data })
+  return await prisma.guild.update({ where: { discordId }, data })
 }
 
 export default {

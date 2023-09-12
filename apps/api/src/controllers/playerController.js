@@ -21,7 +21,18 @@ route.get('/:id', isDataValid([]), async (req, res) => {
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-route.put('/:id', isDataValid(['stars', 'money']), async (req, res) => {
+route.put('/:id', isDataValid([
+  'coins',
+  'glory',
+  'level',
+  'name',
+  'description',
+  'icon',
+  'xp',
+  'npcs',
+  'npcsMax',
+  'maxItens'
+]), async (req, res) => {
   const discordId = req.params.id
 
   const data = await playerRepository.update(discordId, req.body)
