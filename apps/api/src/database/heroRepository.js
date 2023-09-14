@@ -49,39 +49,41 @@ const create = async (id, data) => {
 }
 
 /**
- * Get or create a hero
- * @param {string} heroId
- * @returns {FullHero} Hero
+ * Get all heroes from a guild or create a new one
+ * @param {string} id Discord user id
+ * @returns {FullHero[]} Hero
  */
 const getOrCreate = async (id) => {
-  const hero = await prisma.hero.findFirst({
-    where: { id },
+  const hero = await prisma.hero.findMany({
+    where: {
+      guild: {
+        discordId: id
+      }
+    },
     include: {
       itens: true,
       party: true
     }
   })
 
-  if (hero) {
+  if (hero.length) {
     return hero
   }
 
   const newHero = await create(id, { name: getArrayRandom(HeroNames) })
 
-  return newHero
+  return [newHero]
 }
 
 /**
  * Update a hero
- * @param {string} id Discord user id
+ * @param {string} id hero id
  * @param {import('@prisma/client').} data Partial hero data
  * @returns {import('@prisma/client').Hero} Updated hero
  */
 const update = async (id, data) => {
-  const { discordId } = await getOrCreate(id)
-
   const hero = await prisma.hero.update({
-    where: { discordId },
+    where: { id },
     include: {
       itens: true,
       party: true
@@ -92,26 +94,8 @@ const update = async (id, data) => {
   return hero
 }
 
-/**
- * Get all heroes from a guild
- * @param {string} id Discord user id
- * @returns {FullHero[]} Heroes
- */
-const getAll = async (id) => {
-  const heroes = await prisma.hero.findMany({
-    where: { discordId: id },
-    include: {
-      itens: true,
-      party: true
-    }
-  })
-
-  return heroes
-}
-
-export {
+export default {
   create,
   getOrCreate,
-  update,
-  getAll
+  update
 }
