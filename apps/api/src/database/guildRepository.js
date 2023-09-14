@@ -20,9 +20,32 @@ import prisma from './index.js'
  */
 
 /**
+ * Create a guild
+ * @param {string} id Discord user id
+ * @param {import('@prisma/client').Guild} data
+ * @returns {FullGuild} Guild
+ */
+const create = async (id, data) => {
+  const guild = await prisma.guild.create({
+    include: {
+      itens: true,
+      heroes: true,
+      parties: true,
+      adventures: true
+    },
+    data: {
+      discordId: id,
+      ...data
+    }
+  })
+
+  return guild
+}
+
+/**
  * Get or create a guild
  * @param {string} id Discord user id
- * @returns {Promise<FullGuild>} Player
+ * @returns {FullGuild} Player
  */
 const getOrCreate = async (id) => {
   const player = await prisma.guild.findUnique({
@@ -46,12 +69,12 @@ const getOrCreate = async (id) => {
  * Update a guild
  * @param {string} id Discord user id
  * @param {FullGuild} data Partial guild data
- * @returns {Promise<FullGuild>} Updated guild
+ * @returns {FullGuild} Updated guild
  */
 const update = async (id, data) => {
   const { discordId } = await getOrCreate(id)
 
-  return await prisma.guild.update({
+  const guild = await prisma.guild.update({
     where: { discordId },
     include: {
       itens: true,
@@ -61,9 +84,12 @@ const update = async (id, data) => {
     },
     data
   })
+
+  return guild
 }
 
 export default {
+  create,
   getOrCreate,
   update
 }
