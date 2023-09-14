@@ -9,10 +9,11 @@ import Guild from './routes/Guild.js'
  */
 
 /**
- * @typedef {object} Client
+ * @typedef {object} Mythos
  * @property {string} host api host
  * @property {object} headers api headers
  * @property {RequestClient} requestClient api request client
+ * @property {Guild} guilds guild route
  */
 
 class Mythos extends RequestClient {

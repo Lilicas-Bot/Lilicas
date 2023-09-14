@@ -1,7 +1,7 @@
 class Guild {
   /**
    * Creates an instance of guild route.
-   * @param {import('../Mythos.js/index.js').Client} client
+   * @param {import('../Mythos.js').Mythos} client
    */
   constructor (client) {
     this.client = client
