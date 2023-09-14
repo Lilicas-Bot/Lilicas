@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@lilicas/utils": [
-        "./packages/api/index.js"
+        "./packages/index.js"
       ],
       "@lilicas/mythos": [
         "./packages/mythos/index.js"
