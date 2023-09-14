@@ -12,17 +12,17 @@ import prisma from './index.js'
  * @property {number} xp
  * @property {number} npcs
  * @property {number} npcsMax
- * @property {import('@prisma/client').Item[]} itens
  * @property {number} itensMax
- * @property {import('@prisma/client').Hero[]} heroes
- * @property {import('@prisma/client').Party[]} parties
- * @property {import('@prisma/client').Adventure[]} adventures
+ * @property {import('@prisma/client').Item[]?} itens
+ * @property {import('@prisma/client').Hero[]?} heroes
+ * @property {import('@prisma/client').Party[]?} parties
+ * @property {import('@prisma/client').Adventure[]?} adventures
  */
 
 /**
  * Get or create a guild
  * @param {string} id Discord user id
- * @returns {FullGuild} Player
+ * @returns {Promise<FullGuild>} Player
  */
 const getOrCreate = async (id) => {
   const player = await prisma.guild.findUnique({

@@ -1,22 +1,24 @@
 version: "3.8"
 
 services:
-  postgres:
-    image: postgres
+  cockroach:
+    image: cockroachdb/cockroach:v23.1.9
     profiles:
       - dev
       - production
-    container_name: lilicas-postgres
+    container_name: lilicas-cockroach
     ports:
-      - "5432:5432"
+      - "26257:26257"
+      - "8081:8080"
     networks:
       - lilicas-local
     environment:
-      - POSTGRES_USER=lilicas
-      - POSTGRES_PASSWORD=lilicas
-      - POSTGRES_DB=lilicas
+      - COCKROACH_DATABASE=lilicas
+      - COCKROACH_USER=lilicas
+      - COCKROACH_PASSWORD=lilicas
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ./data/cockroach:/cockroach/cockroach-data
+    command: start-single-node --insecure
 
   redis:
     image: redis
@@ -28,19 +30,6 @@ services:
       - "6379:6379"
     networks:
       - lilicas-local
-
-  pg-admin:
-    image: dpage/pgadmin4
-    profiles:
-      - dev
-    container_name: lilicas-pg-admin
-    ports:
-      - "5050:80"
-    networks:
-      - lilicas-local
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=local@email.com
-      - PGADMIN_DEFAULT_PASSWORD=123
 
   lilicas-api:
     profiles:
@@ -54,7 +43,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - postgres
+      - cockroach
       - redis
     environment:
       - DATABASE_URI=postgres://lilicas:lilicas@postgres:5432/lilicas
