@@ -15,7 +15,7 @@ import Guild from './routes/Guild.js'
  * @property {RequestClient} requestClient api request client
  */
 
-class Client extends RequestClient {
+class Mythos extends RequestClient {
   /**
    * Creates an instance of sdk client.
    * @param {stirng} host api host
@@ -33,4 +33,4 @@ class Client extends RequestClient {
   }
 }
 
-export default Client
+export default Mythos

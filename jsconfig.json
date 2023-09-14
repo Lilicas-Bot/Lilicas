@@ -4,6 +4,9 @@
     "paths": {
       "@lilicas/utils": [
         "./packages/api/index.js"
+      ],
+      "@lilicas/mythos": [
+        "./packages/mythos/index.js"
       ]
     }
   }

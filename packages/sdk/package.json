@@ -1,5 +1,5 @@
 {
-  "name": "@lilicas/sdk",
+  "name": "@lilicas/mythos",
   "description": "simple sdk for lilicas api",
   "version": "1.0.0",
   "main": "index.js",

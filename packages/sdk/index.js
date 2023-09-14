@@ -1,5 +1,5 @@
-import Client from './src/Client.js'
+import Mythos from './src/Mythos.js'
 
 export {
-  Client
+  Mythos
 }
