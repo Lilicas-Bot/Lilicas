@@ -9,10 +9,9 @@ import redisClient from '../redis/index.js'
 const ensureCountdown = async (userId, countdownType) => {
   const type = COUNTDOWN_TYPE[countdownType]
 
-  await redisClient.set(`countdown:${countdownType}:${userId}`, type.id, {
-    EX: type.time,
-    NX: true
-  })
+  const key = `countdown:${countdownType}:${userId}`
+  await redisClient.set(key, type.id)
+  await redisClient.expire(key, type.duration)
 }
 
 const isInCountdown = async (userId, countdownType) => {

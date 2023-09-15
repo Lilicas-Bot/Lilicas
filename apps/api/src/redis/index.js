@@ -1,4 +1,4 @@
-import redis from 'redis'
+import Redis from 'ioredis'
 
-const redisClient = redis.createClient(process.env.REDIS_URL)
-export default redisClient
+const redis = new Redis(process.env.REDIS_URL)
+export default redis

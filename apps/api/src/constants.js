@@ -13,7 +13,7 @@ const HERO_NAMES = Object.freeze([
 const COUNTDOWN_TYPE = {
   COLLECT: {
     id: 'collect',
-    time: 5 * 60 * 1000 // Temp for testing
+    time: 5 * 60 // Temp for testing
   }
 }
 
