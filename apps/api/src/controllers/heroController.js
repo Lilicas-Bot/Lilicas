@@ -22,7 +22,7 @@ const route = Router()
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-route.get('/:id', isDataValid([]), async (req, res) => {
+route.get('/:id', isDataValid(), async (req, res) => {
   const discordId = req.params.id
 
   const player = await heroRepository.getOrCreate(discordId)

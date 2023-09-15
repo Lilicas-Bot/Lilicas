@@ -2,7 +2,6 @@ import { COUNTDOWN_TYPE } from '../constants.js'
 import redisClient from '../redis/index.js'
 
 /**
- *
  * @param {string} userId
  * @param {object} countdownType
  */

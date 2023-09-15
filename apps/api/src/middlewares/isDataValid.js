@@ -15,16 +15,16 @@ const fetchDiscordUser = (userId) =>
  * @param {string[]} validKeys
  * @returns {import('express').RequestHandler}
  */
-const isDataValid = (validKeys) => async (req, res, next) => {
+const isDataValid = (validKeys = []) => async (req, res, next) => {
   const id = req.params.id
 
-  let isValid = await req.redis.hGet(`users:${id}`, 'isValid')
+  let isValid = await req.redis.hget(`users:${id}`, 'isValid')
 
   if (isValid === null) {
     const user = await fetchDiscordUser(id)
 
     isValid = user.code !== 10013 && user.code !== 0
-    req.redis.hSet(`users:${id}`, 'isValid', isValid.toString(), 60 * 60 * 1) // 1 hour
+    req.redis.hset(`users:${id}`, 'isValid', isValid)
   }
 
   if (!isTruthy(isValid)) { // i don't know why, redis return 'true' as a string

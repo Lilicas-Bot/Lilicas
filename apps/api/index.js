@@ -22,8 +22,6 @@ redisClient.on('error', error => {
   console.error('Failed to connect to redis', error)
 })
 
-await redisClient.connect()
-
 app.use((req, res, next) => {
   req.redis = redisClient
   next()
