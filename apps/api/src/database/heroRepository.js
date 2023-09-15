@@ -1,5 +1,5 @@
 import prisma from './index.js'
-import { HeroNames } from '../constants.js'
+import { HERO_NAMES } from '../constants.js'
 import { getArrayRandom } from '@lilicas/utils'
 
 /**
@@ -27,7 +27,7 @@ import { getArrayRandom } from '@lilicas/utils'
  */
 const create = async (id, data) => {
   if (!data.name) {
-    data.name = getArrayRandom(HeroNames)
+    data.name = getArrayRandom(HERO_NAMES)
   }
 
   const hero = await prisma.hero.create({
@@ -70,7 +70,7 @@ const getOrCreate = async (id) => {
     return hero
   }
 
-  const newHero = await create(id, { name: getArrayRandom(HeroNames) })
+  const newHero = await create(id, { name: getArrayRandom(HERO_NAMES) })
 
   return [newHero]
 }

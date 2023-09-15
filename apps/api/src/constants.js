@@ -1,4 +1,4 @@
-const HeroNames = Object.freeze([
+const HERO_NAMES = Object.freeze([
   'Alfarr', 'Martius', 'Boris', 'Karl', 'Gerwald', 'Rodger', 'Herbet', 'Ravi', 'Helewidis', 'Arnoald', 'Magno', 'Héktor', 'Yngvarr', 'Darlan', 'Vicenzo', 'Liam', 'Hloddoviko', 'Damian', 'Elmo', 'Níke', 'Mackeswell', 'Absalom', 'Rayyan', 'Yudi', 'Armstrong', 'Friedrich', 'Apólo', 'Zeus', 'Maximilian', 'Renatus', 'Argos', 'Hélio', 'Benedictus', 'Adônis', 'Orion', 'Atlas', 'Ícarus', 'Herácles', 'Théos', 'Andreas', 'Marcella', 'Celina', 'Ailène',
   'Pilar', 'Chlodovech', 'Luana', 'Níkaia', 'Hilda', 'Dandara', 'Mahthildis', 'Alma', 'Ioná', 'Héloïse', 'Mildþryð', 'Itília', 'Zoé', 'Lot-regne', 'Cibele', 'Saori', 'Maia', 'Carolaine', 'Sakura', 'Natalis', 'Asha', 'Valentina', 'Aurora', 'Aruna', 'Gaia', 'Gertrudes', 'Nadine', 'Imani', 'Íres', 'Philoméne', 'Dione', 'Phoebe', 'Têmis', 'Salomé', 'Afrodite', 'Pandora', 'Alaska', 'Pérola', 'Jacinta', 'Ariadne', 'Erhais', 'Anastásia', 'Jocasta',
   'Dafne', 'Barbar', 'Esperanza', 'Athena', 'Ártemis', 'Pan', 'Ambrose', 'Harry', 'Lazar', 'Relic', 'Balthazar', 'Wilfred', 'Kuron', 'Menw', 'Severus', 'Linus', 'Barron', 'Garon', 'Alister', 'Kiano', 'Pierce', 'Rune', 'Percival', 'Merlin', 'Potter', 'Lux', 'Zadock', 'Wolcott', 'Dune', 'Eris', 'Gandalf', 'Nimbus', 'Elric', 'Puck', 'Phinneas', 'Remus', 'Rubeus', 'Circle', 'Paulinus', 'Lucius', 'Saruman', 'Mix', 'Alatar', 'Jafar', 'Seamus',
@@ -11,5 +11,5 @@ const HeroNames = Object.freeze([
 ])
 
 export {
-  HeroNames
+  HERO_NAMES
 }
