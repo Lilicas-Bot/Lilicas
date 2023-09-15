@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URI")
 }
 
@@ -19,8 +19,8 @@ model Guild {
   xp          Int         @default(0) @map("xp")
   npcs        Int         @default(0) @map("npcs")
   npcsMax     Int         @default(1) @map("npcs_max")
-  itens       Item[]
   maxItens    Int         @default(1) @map("max_itens")
+  itens       Item[]
   heroes      Hero[]
   parties     Party[]
   adventures  Adventure[]
@@ -28,15 +28,15 @@ model Guild {
 
 // insert, update, delete admin only
 model Item {
-  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name     String @map("name")
-  type     String @map("type")
-  rarity   String @map("rarity")
-  icon     String @map("icon")
-  quantity Int    @default(1) @map("quantity")
-  guildId  String @map("guild_id") @db.Uuid
+  id       String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String  @map("name")
+  type     String  @map("type")
+  rarity   String  @map("rarity")
+  icon     String  @map("icon")
+  quantity Int     @default(1) @map("quantity")
+  guildId  String  @map("guild_id") @db.Uuid
   guild    Guild[]
-  heroId   String @map("hero_id") @db.Uuid
+  heroId   String  @map("hero_id") @db.Uuid
   hero     Hero[]
 }
 

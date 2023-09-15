@@ -9,3 +9,6 @@ data/
 
 # logs
 *.log
+
+# editor configuration
+.vscode/settings.json

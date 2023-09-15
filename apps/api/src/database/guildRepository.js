@@ -12,12 +12,35 @@ import prisma from './index.js'
  * @property {number} xp
  * @property {number} npcs
  * @property {number} npcsMax
- * @property {import('@prisma/client').Item[]} itens
  * @property {number} itensMax
- * @property {import('@prisma/client').Hero[]} heroes
- * @property {import('@prisma/client').Party[]} parties
- * @property {import('@prisma/client').Adventure[]} adventures
+ * @property {import('@prisma/client').Item[]?} itens
+ * @property {import('@prisma/client').Hero[]?} heroes
+ * @property {import('@prisma/client').Party[]?} parties
+ * @property {import('@prisma/client').Adventure[]?} adventures
  */
+
+/**
+ * Create a guild
+ * @param {string} id Discord user id
+ * @param {import('@prisma/client').Guild} data
+ * @returns {FullGuild} Guild
+ */
+const create = async (id, data) => {
+  const guild = await prisma.guild.create({
+    include: {
+      itens: true,
+      heroes: true,
+      parties: true,
+      adventures: true
+    },
+    data: {
+      discordId: id,
+      ...data
+    }
+  })
+
+  return guild
+}
 
 /**
  * Get or create a guild
@@ -46,12 +69,12 @@ const getOrCreate = async (id) => {
  * Update a guild
  * @param {string} id Discord user id
  * @param {FullGuild} data Partial guild data
- * @returns {Promise<FullGuild>} Updated guild
+ * @returns {FullGuild} Updated guild
  */
 const update = async (id, data) => {
   const { discordId } = await getOrCreate(id)
 
-  return await prisma.guild.update({
+  const guild = await prisma.guild.update({
     where: { discordId },
     include: {
       itens: true,
@@ -61,9 +84,12 @@ const update = async (id, data) => {
     },
     data
   })
+
+  return guild
 }
 
 export default {
+  create,
   getOrCreate,
   update
 }

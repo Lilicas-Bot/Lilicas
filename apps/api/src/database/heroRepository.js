@@ -1,7 +1,36 @@
 import prisma from './index.js'
+import { HERO_NAMES } from '../constants.js'
+import { getArrayRandom } from '@lilicas/utils'
 
+/**
+ * @typedef {object} FullHero
+ * @property {string} name
+ * @property {number} xp
+ * @property {number} level
+ * @property {number} skillPoints
+ * @property {number} strength
+ * @property {number} agility
+ * @property {number} intellect
+ * @property {number} vitality
+ * @property {number} luck
+ * @property {boolean} available
+ * @property {string} guildId
+ * @property {import('@prisma/client').Item[]?} itens
+ * @property {import('@prisma/client').Party[]?} party
+ */
+
+/**
+ * Create a hero for a guild
+ * @param {string} id
+ * @param {import('@prisma/client').Hero} data
+ * @returns {FullHero} Hero
+ */
 const create = async (id, data) => {
-  return await prisma.hero.create({
+  if (!data.name) {
+    data.name = getArrayRandom(HERO_NAMES)
+  }
+
+  const hero = await prisma.hero.create({
     include: {
       itens: true,
       party: true
@@ -15,30 +44,58 @@ const create = async (id, data) => {
       ...data
     }
   })
+
+  return hero
 }
 
 /**
- * Get or create a hero
+ * Get all heroes from a guild or create a new one
  * @param {string} id Discord user id
- * @returns {import('@prisma/client').Hero[]} Hero
+ * @returns {FullHero[]} Hero
  */
 const getOrCreate = async (id) => {
-  const heros = await prisma.hero.findMany({
-    where: { guild: { discordId: id } },
+  const hero = await prisma.hero.findMany({
+    where: {
+      guild: {
+        discordId: id
+      }
+    },
     include: {
       itens: true,
       party: true
     }
   })
 
-  // check if array is empty
-  if (heros.length > 0) {
-    return heros
+  if (hero.length) {
+    return hero
   }
 
-  return await create(id, { name: 'Pepito' })
+  const newHero = await create(id, { name: getArrayRandom(HERO_NAMES) })
+
+  return [newHero]
 }
 
-export {
-  getOrCreate
+/**
+ * Update a hero
+ * @param {string} id hero id
+ * @param {import('@prisma/client').} data Partial hero data
+ * @returns {import('@prisma/client').Hero} Updated hero
+ */
+const update = async (id, data) => {
+  const hero = await prisma.hero.update({
+    where: { id },
+    include: {
+      itens: true,
+      party: true
+    },
+    data
+  })
+
+  return hero
+}
+
+export default {
+  create,
+  getOrCreate,
+  update
 }

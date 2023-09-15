@@ -1,3 +1,5 @@
+import { isTruthy } from '@lilicas/utils'
+
 const FETCH_OPTIONS = {
   headers: {
     Authorization: `Bot ${process.env.TOKEN}`
@@ -15,22 +17,28 @@ const fetchDiscordUser = (userId) =>
  */
 const isDataValid = (validKeys) => async (req, res, next) => {
   const id = req.params.id
-  const { code } = await fetchDiscordUser(id)
 
-  if (code === 10013 || code === 0) {
-    res
+  let isValid = await req.redis.hGet(`users:${id}`, 'isValid')
+
+  if (isValid === null) {
+    const user = await fetchDiscordUser(id)
+
+    isValid = user.code !== 10013 && user.code !== 0
+    req.redis.hSet(`users:${id}`, 'isValid', isValid.toString(), 60 * 60 * 1) // 1 hour
+  }
+
+  if (!isTruthy(isValid)) { // i don't know why, redis return 'true' as a string
+    return res
       .status(400)
       .json({ error: 'Invalid discord id' })
-    return
   }
 
   const invalidKeys = Object.keys(req.body).filter(key => !validKeys.includes(key))
 
   if (invalidKeys.length > 0) {
-    res
+    return res
       .status(400)
       .json({ error: `Invalid keys: ${invalidKeys.join(', ')}` })
-    return
   }
 
   next()
