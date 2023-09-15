@@ -10,6 +10,14 @@ const HERO_NAMES = Object.freeze([
   'Soprano', 'Spartakus', 'Fisk', 'Slayer', 'Joker', 'Octopus', 'Feroz', 'Evil Master', 'Espantalho', 'Poison'
 ])
 
+const COUNTDOWN_TYPE = {
+  COLLECT: {
+    id: 'collect',
+    time: 5 * 60 * 1000 // Temp for testing
+  }
+}
+
 export {
-  HERO_NAMES
+  HERO_NAMES,
+  COUNTDOWN_TYPE
 }
