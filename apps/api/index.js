@@ -1,7 +1,7 @@
 import express from 'express'
 import router from './src/routes.js'
 import prisma from './src/database/index.js'
-import redis from 'redis'
+import redisClient from './src/redis/index.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,8 +17,6 @@ await prisma.$connect()
   }).catch(error => {
     console.error('Failed to connect to database', error)
   })
-
-const redisClient = redis.createClient(process.env.REDIS_URL)
 
 redisClient.on('error', error => {
   console.error('Failed to connect to redis', error)
