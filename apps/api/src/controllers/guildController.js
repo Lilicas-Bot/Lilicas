@@ -32,7 +32,7 @@ route.get('/:id', isDataValid(), async (req, res) => {
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-route.post('/:id', isDataValid(keys), async (req, res) => {
+route.post('/:id', isDataValid(), async (req, res) => {
   const discordId = req.params.id
   const data = await guildRepository.create(discordId, req.body)
 
