@@ -14,8 +14,6 @@ services:
       - lilicas-local
     environment:
       - COCKROACH_DATABASE=lilicas
-      - COCKROACH_USER=lilicas
-      - COCKROACH_PASSWORD=lilicas
     volumes:
       - ./data/cockroach:/cockroach/cockroach-data
     command: start-single-node --insecure
