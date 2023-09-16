@@ -1,7 +1,8 @@
 /**
  * Get random element from array
- * @param {Array} array
- * @returns {any} Random element
+ * @template T
+ * @param {Array<T>} array
+ * @returns {T} Random element
  */
 const getArrayRandom = (array) => {
   return array[Math.floor(Math.random() * array.length)]

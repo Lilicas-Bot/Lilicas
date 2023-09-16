@@ -3,7 +3,7 @@ import redisClient from '../redis/index.js'
 
 /**
  * @param {string} userId
- * @param {object} countdownType
+ * @param {keyof COUNTDOWN_TYPE} countdownType
  */
 const ensureCountdown = async (userId, countdownType) => {
   const type = COUNTDOWN_TYPE[countdownType]
@@ -13,6 +13,11 @@ const ensureCountdown = async (userId, countdownType) => {
   await redisClient.expire(key, type.duration)
 }
 
+/**
+ * @param {string} userId
+ * @param {keyof COUNTDOWN_TYPE} countdownType
+ * @returns
+ */
 const isInCountdown = async (userId, countdownType) => {
   return await redisClient.exists(`countdown:${countdownType}:${userId}`)
 }
