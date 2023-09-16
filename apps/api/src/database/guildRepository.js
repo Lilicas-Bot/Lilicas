@@ -1,22 +1,7 @@
-import prisma from './index.js'
+import { prisma, handlePrismaError } from './index.js'
 
 /**
- * @typedef {object} FullGuild
- * @property {string} discordId
- * @property {number} coins
- * @property {number} glory
- * @property {number} level
- * @property {string} name
- * @property {string} description
- * @property {string} icon
- * @property {number} xp
- * @property {number} npcs
- * @property {number} npcsMax
- * @property {number} itensMax
- * @property {import('@prisma/client').Item[]?} itens
- * @property {import('@prisma/client').Hero[]?} heroes
- * @property {import('@prisma/client').Party[]?} parties
- * @property {import('@prisma/client').Adventure[]?} adventures
+ * @typedef {import('@prisma/client').Prisma.GuildCreateInput} FullGuild
  */
 
 /**
@@ -26,7 +11,7 @@ import prisma from './index.js'
  * @returns {FullGuild} Guild
  */
 const create = async (id, data) => {
-  const guild = await prisma.guild.create({
+  const guild = prisma.guild.create({
     include: {
       itens: true,
       heroes: true,
@@ -37,7 +22,7 @@ const create = async (id, data) => {
       discordId: id,
       ...data
     }
-  })
+  }).catch(handlePrismaError)
 
   return guild
 }
@@ -56,7 +41,7 @@ const getOrCreate = async (id) => {
       parties: true,
       adventures: true
     }
-  })
+  }).catch(handlePrismaError)
 
   if (player) {
     return player
@@ -83,7 +68,7 @@ const update = async (id, data) => {
       adventures: true
     },
     data
-  })
+  }).catch(handlePrismaError)
 
   return guild
 }

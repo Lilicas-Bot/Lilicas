@@ -1,22 +1,9 @@
-import prisma from './index.js'
+import { prisma, handlePrismaError } from './index.js'
 import { HERO_NAMES } from '../constants.js'
 import { getArrayRandom } from '@lilicas/utils'
 
 /**
- * @typedef {object} FullHero
- * @property {string} name
- * @property {number} xp
- * @property {number} level
- * @property {number} skillPoints
- * @property {number} strength
- * @property {number} agility
- * @property {number} intellect
- * @property {number} vitality
- * @property {number} luck
- * @property {boolean} available
- * @property {string} guildId
- * @property {import('@prisma/client').Item[]?} itens
- * @property {import('@prisma/client').Party[]?} party
+ * @typedef {import('@prisma/client').Prisma.HeroCreateInput} FullHero
  */
 
 /**
@@ -43,7 +30,7 @@ const create = async (id, data) => {
       },
       ...data
     }
-  })
+  }).catch(handlePrismaError)
 
   return hero
 }
@@ -51,7 +38,6 @@ const create = async (id, data) => {
 /**
  * Get all heroes from a guild or create a new one
  * @param {string} id Discord user id
- * @returns {FullHero[]} Hero
  */
 const getOrCreate = async (id) => {
   const hero = await prisma.hero.findMany({
@@ -64,7 +50,7 @@ const getOrCreate = async (id) => {
       itens: true,
       party: true
     }
-  })
+  }).catch(handlePrismaError)
 
   if (hero.length) {
     return hero
@@ -72,14 +58,13 @@ const getOrCreate = async (id) => {
 
   const newHero = await create(id, { name: getArrayRandom(HERO_NAMES) })
 
-  return [newHero]
+  return newHero.code ? newHero : [newHero]
 }
 
 /**
  * Update a hero
  * @param {string} id hero id
- * @param {import('@prisma/client').} data Partial hero data
- * @returns {import('@prisma/client').Hero} Updated hero
+ * @param {FullHero} data Partial hero data
  */
 const update = async (id, data) => {
   const hero = await prisma.hero.update({
@@ -89,7 +74,7 @@ const update = async (id, data) => {
       party: true
     },
     data
-  })
+  }).catch(handlePrismaError)
 
   return hero
 }
