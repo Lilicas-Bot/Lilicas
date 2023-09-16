@@ -19,8 +19,8 @@ class Guild {
   /**
    * create guild using discord user id
    * @param {string} discordId discord user id
-   * @param {Promise<object>} data guild data, will create default guild if not provided
-   * @returns
+   * @param {object} data guild data, will create default guild if not provided
+   * @returns {Promise<object>} guild data
    */
   post (discordId, data) {
     return this.client.post(`/guilds/${discordId}`, data)
