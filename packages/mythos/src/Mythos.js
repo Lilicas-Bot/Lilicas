@@ -1,6 +1,7 @@
 import { RequestClient } from '@lilicas/utils'
 
 import Guild from './routes/Guild.js'
+import Countdown from './routes/Countdown.js'
 
 /**
  * @typedef {object} headers
@@ -31,6 +32,13 @@ class Mythos extends RequestClient {
      * @memberof Client
      */
     this.guilds = new Guild(this)
+
+    /**
+     * @type {Countdown}
+     * @description countdown route
+     * @memberof Client
+     */
+    this.countdown = new Countdown(this)
   }
 }
 
