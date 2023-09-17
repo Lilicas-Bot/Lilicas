@@ -19,8 +19,8 @@ model Guild {
   xp          Int         @default(0) @map("xp")
   npcs        Int         @default(0) @map("npcs")
   npcsMax     Int         @default(1) @map("npcs_max")
-  maxItens    Int         @default(1) @map("max_itens")
-  itens       Item[]
+  maxItems    Int         @default(1) @map("max_items")
+  items       Item[]
   heroes      Hero[]
   parties     Party[]
   adventures  Adventure[]
@@ -54,7 +54,7 @@ model Hero {
   available   Boolean @default(true) @map("available")
   guildId     String  @map("guild_id") @db.Uuid
   guild       Guild   @relation(fields: [guildId], references: [id])
-  itens       Item[]
+  items       Item[]
   party       Party[]
 }
 
