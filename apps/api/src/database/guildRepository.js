@@ -11,7 +11,7 @@ import { prisma, handlePrismaError } from './index.js'
  * @returns {FullGuild} Guild
  */
 const create = async (id, data) => {
-  const guild = prisma.guild.create({
+  const guild = await prisma.guild.create({
     include: {
       itens: true,
       heroes: true,

@@ -6,9 +6,9 @@ const FETCH_OPTIONS = {
   }
 }
 
-const fetchDiscordUser = (userId) =>
+const checkDiscordUser = (userId) =>
   fetch(`https://discord.com/api/v10/users/${userId}`, FETCH_OPTIONS)
-    .then(res => res.json())
+    .then(res => res.ok)
 
 /**
  * Checks if the data received is valid
@@ -21,9 +21,9 @@ const isDataValid = (validKeys = []) => async (req, res, next) => {
   let isValid = await req.redis.hget(`users:${id}`, 'isValid')
 
   if (isValid === null) {
-    const user = await fetchDiscordUser(id)
+    const validation = await checkDiscordUser(id)
+    isValid = validation
 
-    isValid = user.code !== 10013 && user.code !== 0
     req.redis.hset(`users:${id}`, 'isValid', isValid)
   }
 
