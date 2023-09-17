@@ -1,24 +1,26 @@
 import { readdir, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
-const loadDirectory = async (path) => {
+const loadDirectory = async (path, modules = []) => {
   const files = await readdir(path)
     .catch(() => [])
 
-  const promisedFiles = files
-    .filter(file => file.endsWith('.js'))
-    .map(async (file) => {
-      const filePath = resolve(path, file)
-      const isDirectory = await stat(filePath).then((d) => d.isDirectory())
+  for await (const file of files) {
+    const filePath = resolve(path, file)
+    const isDirectory = await stat(filePath).then((d) => d.isDirectory())
 
-      if (isDirectory) return loadDirectory(filePath)
+    if (isDirectory) {
+      await loadDirectory(filePath, modules)
+      continue
+    }
 
-      return import('file://' + filePath)
-        .then((mod) => mod.default)
-    })
+    if (file.endsWith('.js')) {
+      const module = await import('file://' + filePath)
+      modules.push(module.default)
+    }
+  }
 
-  return Promise.all(promisedFiles)
-    .then((arr) => arr.flat())
+  return modules
 }
 
 export {
