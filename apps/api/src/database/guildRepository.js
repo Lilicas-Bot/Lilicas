@@ -8,7 +8,7 @@ import { prisma, handlePrismaError } from './index.js'
  * Create a guild
  * @param {string} id Discord user id
  * @param {import('@prisma/client').Guild} data
- * @returns {FullGuild} Guild
+ * @returns {Promise<FullGuild>} Guild
  */
 const create = async (id, data) => {
   const guild = await prisma.guild.create({
@@ -30,7 +30,7 @@ const create = async (id, data) => {
 /**
  * Get or create a guild
  * @param {string} id Discord user id
- * @returns {FullGuild} Player
+ * @returns {Promise<FullGuild>} Guild
  */
 const getOrCreate = async (id) => {
   const player = await prisma.guild.findUnique({
@@ -54,7 +54,7 @@ const getOrCreate = async (id) => {
  * Update a guild
  * @param {string} id Discord user id
  * @param {FullGuild} data Partial guild data
- * @returns {FullGuild} Updated guild
+ * @returns {Promise<FullGuild>} Updated guild
  */
 const update = async (id, data) => {
   const { discordId } = await getOrCreate(id)

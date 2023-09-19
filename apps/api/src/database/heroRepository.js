@@ -10,7 +10,7 @@ import { getArrayRandom } from '@lilicas/utils'
  * Create a hero for a guild
  * @param {string} id
  * @param {import('@prisma/client').Hero} data
- * @returns {FullHero} Hero
+ * @returns {Promise<FullHero>} Hero
  */
 const create = async (id, data) => {
   if (!data.name) {
@@ -38,6 +38,7 @@ const create = async (id, data) => {
 /**
  * Get all heroes from a guild or create a new one
  * @param {string} id Discord user id
+ * @returns {Promise<FullHero[]>} Heroes
  */
 const getOrCreate = async (id) => {
   const hero = await prisma.hero.findMany({
@@ -64,7 +65,7 @@ const getOrCreate = async (id) => {
 /**
  * Update a hero
  * @param {string} id hero id
- * @param {FullHero} data Partial hero data
+ * @param {Promise<FullHero>} data Partial hero data
  */
 const update = async (id, data) => {
   const hero = await prisma.hero.update({
