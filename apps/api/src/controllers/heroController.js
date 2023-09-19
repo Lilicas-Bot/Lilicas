@@ -52,7 +52,7 @@ route.post('/:id', isDataValid(keys), async (req, res) => {
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
-route.put('/:id', isDataValid(keys), async (req, res) => {
+route.put('/:id', isDataValid(keys, false), async (req, res) => {
   const heroId = req.params.id
   const data = await heroRepository.update(heroId, req.body)
 

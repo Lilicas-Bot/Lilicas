@@ -5,6 +5,10 @@
  */
 
 class Countdown {
+  /**
+   * Creates an instance of guild route.
+   * @param {import('../Mythos.js').Mythos} client
+   */
   constructor (client) {
     this.client = client
   }

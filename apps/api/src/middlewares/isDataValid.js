@@ -12,25 +12,28 @@ const checkDiscordUser = (userId) =>
 
 /**
  * Checks if the data received is valid
- * @param {string[]} validKeys
+ * @param {string[]} validKeys valid keys to check
+ * @param {boolean} checkDiscord check if the discord id is valid
  * @returns {import('express').RequestHandler}
  */
-const isDataValid = (validKeys = []) => async (req, res, next) => {
+const isDataValid = (validKeys = [], checkDiscord = true) => async (req, res, next) => {
   const id = req.params.id
 
-  let isValid = await req.redis.hget(`users:${id}`, 'isValid')
+  if (checkDiscord) {
+    let isValid = await req.redis.hget(`users:${id}`, 'isValid')
 
-  if (isValid === null) {
-    const validation = await checkDiscordUser(id)
-    isValid = validation
+    if (isValid === null) {
+      const validation = await checkDiscordUser(id)
+      isValid = validation
 
-    req.redis.hset(`users:${id}`, 'isValid', isValid)
-  }
+      req.redis.hset(`users:${id}`, 'isValid', isValid)
+    }
 
-  if (!isTruthy(isValid)) { // i don't know why, redis return 'true' as a string
-    return res
-      .status(400)
-      .json({ error: 'Invalid discord id' })
+    if (!isTruthy(isValid)) { // i don't know why, redis return 'true' as a string
+      return res
+        .status(400)
+        .json({ error: 'Invalid discord id' })
+    }
   }
 
   const invalidKeys = Object.keys(req.body).filter(key => !validKeys.includes(key))
