@@ -15,12 +15,28 @@ export default class InteractionListener extends Listener {
       const command = this.client.commands.get(interaction.data.name)
       if (!command) return
 
-      command.run(interaction)
+      if (interaction?.data?.options) {
+        interaction.data.options = this.parseOptions(interaction.data.options)
+      }
+
+      try {
+        const cmdRun = await command.run(interaction)
+        if (cmdRun) {
+          interaction.createMessage(cmdRun)
+        }
+      } catch (e) {
+        console.log(e)
+        interaction.createMessage('Error')
+      }
     } else if (interaction instanceof ComponentInteraction) {
       const customInteraction = this.client.interactions.get(interaction.data.custom_id)
       if (!customInteraction) return
 
       interaction.run(interaction)
     }
+  }
+
+  parseOptions (options) {
+    return options.reduce((acc, curr) => { acc[curr.name] = curr.value; return acc }, {})
   }
 }
