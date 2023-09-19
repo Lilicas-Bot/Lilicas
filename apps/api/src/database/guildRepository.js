@@ -13,7 +13,7 @@ import { prisma, handlePrismaError } from './index.js'
 const create = async (id, data) => {
   const guild = await prisma.guild.create({
     include: {
-      itens: true,
+      items: true,
       heroes: true,
       parties: true,
       adventures: true
@@ -36,7 +36,7 @@ const getOrCreate = async (id) => {
   const player = await prisma.guild.findUnique({
     where: { discordId: id },
     include: {
-      itens: true,
+      items: true,
       heroes: true,
       parties: true,
       adventures: true
@@ -62,7 +62,7 @@ const update = async (id, data) => {
   const guild = await prisma.guild.update({
     where: { discordId },
     include: {
-      itens: true,
+      items: true,
       heroes: true,
       parties: true,
       adventures: true

@@ -19,7 +19,7 @@ const create = async (id, data) => {
 
   const hero = await prisma.hero.create({
     include: {
-      itens: true,
+      items: true,
       party: true
     },
     data: {
@@ -48,7 +48,7 @@ const getOrCreate = async (id) => {
       }
     },
     include: {
-      itens: true,
+      items: true,
       party: true
     }
   }).catch(handlePrismaError)
@@ -71,7 +71,7 @@ const update = async (id, data) => {
   const hero = await prisma.hero.update({
     where: { id },
     include: {
-      itens: true,
+      items: true,
       party: true
     },
     data
