@@ -2,7 +2,7 @@ import { HERO_NAMES } from '../constants.js'
 // @ts-ignore
 import { getArrayRandom } from '@lilicas/utils'
 import { type Hero, type InsertHero } from '../models/Hero.js'
-import { connection, handleErros } from '../connection.js'
+import { connection, handleErrors } from '../connection.js'
 import { type Guild } from '../models/Guild.js'
 
 /**
@@ -11,7 +11,7 @@ import { type Guild } from '../models/Guild.js'
  * @param data hero data
  * @returns hero
  */
-const create = async (id: string, data: InsertHero): Promise<Guild | null> => {
+const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
   if (data.name === undefined) {
     data.name = getArrayRandom(HERO_NAMES)
   }
@@ -31,7 +31,7 @@ const create = async (id: string, data: InsertHero): Promise<Guild | null> => {
         .returning<Hero[]>('*')
 
       return hero
-    }).catch(handleErros)
+    }).catch(handleErrors)
 
   if (!hero) {
     return null
@@ -59,7 +59,7 @@ const getOrCreate = async (id: string) => {
 
       return heros
     })
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (Array.isArray(heros) && heros.length > 0) {
     return heros
@@ -89,7 +89,7 @@ const update = async (id: string, data: InsertHero) => {
     .update(data)
     .where('id', id)
     .returning<Hero[]>('*')
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (!hero) {
     return null
