@@ -10,7 +10,8 @@ export default class Name extends Command {
         name: 'nome',
         description: 'Novo nome da Guilda',
         min_length: 4,
-        max_length: 12
+        max_length: 12,
+        required: true
       }]
     })
   }

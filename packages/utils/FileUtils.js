@@ -1,6 +1,12 @@
 import { readdir, stat } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
+/**
+ * Load files recursively
+ * @params {string} path - Starting path
+ * @params {object[]=} - Array of imported modules
+ * @returns {object[]}
+ */
 const loadDirectory = async (path, modules = []) => {
   const files = await readdir(path)
     .catch(() => [])
