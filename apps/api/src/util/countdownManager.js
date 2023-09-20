@@ -23,7 +23,18 @@ const isInCountdown = async (userId, countdownType) => {
   return await redisClient.exists(`countdown:${type.id}:${userId}`)
 }
 
+/**
+ * @param {string} userId
+ * @param {keyof COUNTDOWN_TYPE} countdownType
+ * @returns {number} Time in seconds
+ */
+const getCountdown = async (userId, countdownType) => {
+  const type = COUNTDOWN_TYPE[countdownType]
+  return await redisClient.ttl(`countdown:${type.id}:${userId}`)
+}
+
 export default {
   ensureCountdown,
-  isInCountdown
+  isInCountdown,
+  getCountdown
 }
