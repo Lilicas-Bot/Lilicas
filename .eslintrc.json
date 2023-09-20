@@ -9,5 +9,11 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  // "overrides": [
+  //   {
+  //     "files": ["*.ts"],
+  //     "extends": "standard-with-typescript"
+  //   }
+  // ],
   "rules": {}
 }

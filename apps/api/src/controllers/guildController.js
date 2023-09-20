@@ -1,4 +1,4 @@
-import guildRepository from '../database/guildRepository.js'
+import { guildRepository } from '@lilicas/db'
 import isDataValid from '../middlewares/isDataValid.js'
 import { Router } from 'express'
 
@@ -25,8 +25,8 @@ route.get('/:id', isDataValid(), async (req, res) => {
   const discordId = req.params.id
   const data = await guildRepository.getOrCreate(discordId)
 
-  if (data.message) {
-    return res.status(400).json({ error: data.message })
+  if (!data) {
+    return res.status(400).json({ error: true })
   }
 
   res.status(200).json(data)
@@ -40,8 +40,8 @@ route.post('/:id', isDataValid(keys), async (req, res) => {
   const discordId = req.params.id
   const data = await guildRepository.create(discordId, req.body)
 
-  if (data.message) {
-    return res.status(400).json({ error: data.message })
+  if (!data) {
+    return res.status(400).json({ error: true })
   }
 
   res.status(201).json(data)
@@ -55,8 +55,8 @@ route.put('/:id', isDataValid(keys), async (req, res) => {
   const discordId = req.params.id
   const data = await guildRepository.update(discordId, req.body)
 
-  if (data.message) {
-    return res.status(400).json({ error: data.message })
+  if (!data) {
+    return res.status(400).json({ error: true })
   }
 
   res.status(200).json(data)

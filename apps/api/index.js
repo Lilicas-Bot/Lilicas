@@ -5,7 +5,7 @@ import redisClient from './src/redis/index.js'
 const app = express()
 const port = process.env.PORT || 3000
 
-if (!process.env.DATABASE_URL && !process.env.TOKEN && !process.env.REDIS_URL) {
+if (!process.env.DATABASE_URI && !process.env.TOKEN && !process.env.REDIS_URL) {
   console.error('Environment variables not set')
   process.exit(1)
 }
