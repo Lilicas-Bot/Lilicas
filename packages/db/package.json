@@ -1,0 +1,20 @@
+{
+  "name": "@lilicas/db",
+  "description": "database models and repository",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "@lilicas/utils": "*",
+    "knex": "^2.5.1",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "@types/node": "^20.6.2"
+  }
+}

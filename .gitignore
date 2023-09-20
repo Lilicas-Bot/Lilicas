@@ -12,3 +12,6 @@ data/
 
 # editor configuration
 .vscode/settings.json
+
+# build output
+dist/

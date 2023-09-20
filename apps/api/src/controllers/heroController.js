@@ -1,4 +1,4 @@
-import heroRepository from '../database/heroRepository.js'
+import { heroRepository } from '@lilicas/db'
 import isDataValid from '../middlewares/isDataValid.js'
 import { Router } from 'express'
 
@@ -26,8 +26,8 @@ route.get('/:id', isDataValid(), async (req, res) => {
   const discordId = req.params.id
   const data = await heroRepository.getOrCreate(discordId)
 
-  if (data.message) {
-    return res.status(400).json({ error: data.message })
+  if (!data) {
+    return res.status(400).json({ error: true })
   }
 
   res.status(200).json(data)
@@ -41,8 +41,8 @@ route.post('/:id', isDataValid(keys), async (req, res) => {
   const discordId = req.params.id
   const data = await heroRepository.create(discordId, req.body)
 
-  if (data.message) {
-    return res.status(400).json({ error: data.message })
+  if (!data) {
+    return res.status(400).json({ error: true })
   }
 
   res.status(201).json(data)
@@ -56,8 +56,8 @@ route.put('/:id', isDataValid(keys, false), async (req, res) => {
   const heroId = req.params.id
   const data = await heroRepository.update(heroId, req.body)
 
-  if (data.message) {
-    return res.status(400).json({ error: data.message })
+  if (!data) {
+    return res.status(400).json({ error: true })
   }
 
   res.status(200).json(data)

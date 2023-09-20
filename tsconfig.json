@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@lilicas/utils": [
+        "./packages/utils/index.js"
+      ],
+      "@lilicas/mythos": [
+        "./packages/mythos/index.js"
+      ],
+      "@lilicas/db": [
+        "./packages/db/dist/index.js"
+      ]
+    }
+  },
+  "references": [
+    { "path": "./packages/db" }
+  ],
+  "exclude": [
+    "packages/utils/**/*",
+    "packages/mythos/**/*",
+    "packages/db/migrations/**/*",
+    "apps/**/*",
+  ]
+}
