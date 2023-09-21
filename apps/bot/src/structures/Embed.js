@@ -1,9 +1,9 @@
-import { EMBED_COLORS } from '../util/Constants.js'
+import { EmbedColors } from '../util/Constants.js'
 
 export default class Embed {
   constructor () {
     this.type = 'rich'
-    this.color = EMBED_COLORS.default
+    this.color = EmbedColors.DEFAULT
     this.fields = []
   }
 
