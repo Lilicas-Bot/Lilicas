@@ -18,12 +18,12 @@ const connection = K.knex({
   }
 })
 
-const handleErros = (error: Error): null => {
+const handleErrors = (error: Error): null => {
   console.error(error)
   return null
 }
 
 export {
   connection,
-  handleErros
+  handleErrors
 }

@@ -32,6 +32,16 @@ class Countdown {
   check (id, type) {
     return this.client.get(`/countdown/${type}/${id}`)
   }
+
+  /**
+   *
+   * @param {string} id
+   * @param {keyof countdownType} type
+   * @returns {number}
+   */
+  getTime (id, type) {
+    return this.client.get(`/countdown/${type}/${id}/time`)
+  }
 }
 
 export default Countdown
