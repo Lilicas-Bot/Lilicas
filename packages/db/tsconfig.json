@@ -8,6 +8,7 @@
   },
   "include": [
     "index.ts",
+    "knexfile.ts",
     "src/**/*.ts"
   ]
 }

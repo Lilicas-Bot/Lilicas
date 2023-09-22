@@ -8,7 +8,7 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .first<Guild>()
     .catch(handleErros)
 
-  if (query) {
+  if (query !== null) {
     return await update(id, data)
   }
 
@@ -21,7 +21,7 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .returning<Guild[]>('*')
     .catch(handleErros)
 
-  if (!guild) {
+  if (guild === null) {
     return null
   }
 
@@ -36,7 +36,7 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
     .first<Guild>()
     .catch(handleErros)
 
-  if (query) {
+  if (query !== null) {
     return query
   }
 
@@ -46,7 +46,7 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
 const update = async (id: string, data: InsertGuild): Promise<Guild | null> => {
   const query = await getOrCreate(id)
 
-  if (!query) {
+  if (query === null) {
     return null
   }
 
@@ -57,7 +57,7 @@ const update = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .returning<Guild[]>('*')
     .catch(handleErros)
 
-  if (!guild) {
+  if (guild === null) {
     return null
   }
 

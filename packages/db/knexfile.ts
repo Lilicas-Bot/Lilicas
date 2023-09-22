@@ -4,7 +4,7 @@
 export default {
   main: {
     client: 'cockroachdb',
-    connection: process.env.DATABASE_URI || {
+    connection: process.env.DATABASE_URI ?? {
       host: 'localhost',
       port: 26257,
       database: 'lilicas',

@@ -1,22 +1,9 @@
 import K from 'knex'
+import config from '../knexfile.js'
 
-const connection = K.knex({
-  client: 'cockroachdb',
-  connection: process.env.DATABASE_URI || {
-    host: 'localhost',
-    port: 26257,
-    database: 'lilicas',
-    user: 'root',
-    password: ''
-  },
-  pool: {
-    min: 2,
-    max: 10
-  },
-  migrations: {
-    tableName: '_knex_migrations'
-  }
-})
+const { NODE_ENV } = process.env
+
+const connection = K.knex(config[NODE_ENV ?? 'main'])
 
 const handleErros = (error: Error): null => {
   console.error(error)

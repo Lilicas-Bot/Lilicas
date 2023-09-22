@@ -9,11 +9,14 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  // "overrides": [
-  //   {
-  //     "files": ["*.ts"],
-  //     "extends": "standard-with-typescript"
-  //   }
-  // ],
-  "rules": {}
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": "standard-with-typescript"
+    }
+  ],
+  "rules": {},
+  "ignorePatterns":[
+    "**/*.d.ts"
+  ]
 }
