@@ -5,7 +5,7 @@ import { type Item } from './src/models/Item.js'
 import { type Party, type PartyAdventure, type PartyHero } from './src/models/Party.js'
 import { type Timestamp } from './src/types.js'
 
-import { connection, handleErros } from './src/connection.js'
+import { connection, handleErrors } from './src/connection.js'
 import guildRepository from './src/repositories/guildRepository.js'
 import heroRepository from './src/repositories/heroRepository.js'
 
@@ -23,7 +23,7 @@ export {
   type Timestamp,
 
   connection,
-  handleErros,
+  handleErrors,
 
   guildRepository,
   heroRepository

@@ -1,5 +1,5 @@
 import { type Guild, type InsertGuild } from '../models/Guild.js'
-import { connection, handleErros } from '../connection.js'
+import { connection, handleErrors } from '../connection.js'
 
 /**
  * create a guild
@@ -12,7 +12,7 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .select('*')
     .where('discord_id', id)
     .first<Guild>()
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (query !== null) {
     return await update(id, data)
@@ -25,7 +25,7 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
       ...data
     })
     .returning<Guild[]>('*')
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (guild === null) {
     return null
@@ -45,7 +45,7 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
     .from('guilds')
     .where('discord_id', id)
     .first<Guild>()
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (query !== null) {
     return query
@@ -71,7 +71,7 @@ const update = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .from('guilds')
     .where('discord_id', query.discord_id)
     .returning<Guild[]>('*')
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (guild === null) {
     return null

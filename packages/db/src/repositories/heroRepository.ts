@@ -2,7 +2,7 @@ import { HERO_NAMES } from '../constants.js'
 // TODO: fix type declaration
 import { getArrayRandom } from '@lilicas/utils'
 import { type Hero, type InsertHero } from '../models/Hero.js'
-import { connection, handleErros } from '../connection.js'
+import { connection, handleErrors } from '../connection.js'
 import { type Guild } from '../models/Guild.js'
 
 /**
@@ -31,7 +31,7 @@ const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
         .returning<Hero[]>('*')
 
       return hero
-    }).catch(handleErros)
+    }).catch(handleErrors)
 
   if (hero === null) {
     return null
@@ -59,7 +59,7 @@ const getOrCreate = async (id: string): Promise<Hero[] | null> => {
 
       return heros
     })
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (Array.isArray(heros) && heros.length > 0) {
     return heros
@@ -89,7 +89,7 @@ const update = async (id: string, data: InsertHero): Promise<Hero | null> => {
     .update(data)
     .where('id', id)
     .returning<Hero[]>('*')
-    .catch(handleErros)
+    .catch(handleErrors)
 
   if (hero === null) {
     return null
