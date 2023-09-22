@@ -1,6 +1,12 @@
 import { type Guild, type InsertGuild } from '../models/Guild.js'
 import { connection, handleErros } from '../connection.js'
 
+/**
+ * create a guild
+ * @param id discord id
+ * @param data guild data
+ * @returns guild | null
+ */
 const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
   const query = await connection('guilds')
     .select('*')
@@ -28,6 +34,11 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
   return guild[0]
 }
 
+/**
+ * get or create a guild
+ * @param id discord id
+ * @returns guild | null
+ */
 const getOrCreate = async (id: string): Promise<Guild | null> => {
   const query = await connection
     .select('*')
@@ -43,6 +54,11 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
   return await create(id, { name: 'New Guild' })
 }
 
+/**
+ * update a guild
+ * @param id discord id
+ * @param data guild data
+ */
 const update = async (id: string, data: InsertGuild): Promise<Guild | null> => {
   const query = await getOrCreate(id)
 

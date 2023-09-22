@@ -9,7 +9,7 @@ import { type Guild } from '../models/Guild.js'
  * create a hero
  * @param id discord id
  * @param data hero data
- * @returns hero
+ * @returns hero | null
  */
 const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
   if (data.name === undefined) {
@@ -43,7 +43,7 @@ const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
 /**
  * get or create a hero
  * @param id discord id
- * @returns hero[]
+ * @returns hero[] | null
  */
 const getOrCreate = async (id: string): Promise<Hero[] | null> => {
   const heros = await connection
@@ -78,7 +78,7 @@ const getOrCreate = async (id: string): Promise<Hero[] | null> => {
  * update a hero
  * @param id hero id
  * @param data hero partial data
- * @returns hero
+ * @returns hero | null
  */
 const update = async (id: string, data: InsertHero): Promise<Hero | null> => {
   if (Object.keys(data).length === 0) {
