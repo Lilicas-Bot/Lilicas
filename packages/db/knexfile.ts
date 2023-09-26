@@ -1,15 +1,13 @@
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
-export default {
+import type { Knex } from 'knex'
+
+const config: Record<string, Knex.Config> = {
   main: {
     client: 'cockroachdb',
     connection: process.env.DATABASE_URI ?? {
-      host: 'localhost',
-      port: 26257,
       database: 'lilicas',
-      user: 'root',
-      password: ''
+      user: 'lilicas',
+      password: '',
+      port: 26257
     },
     pool: {
       min: 2,
@@ -20,3 +18,5 @@ export default {
     }
   }
 }
+
+export default config
