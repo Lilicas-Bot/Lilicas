@@ -18,26 +18,66 @@ export default class RequestClient {
     }, headers)
   }
 
+  /**
+   * @template T
+   * @param {string} url
+   * @param {object} params
+   * @returns {Promise<T>}
+   */
   get (url, params) {
     return this.prepareRequest('GET', url, params)
   }
 
+  /**
+   * @template T
+   * @param {string} url
+   * @param {object} params
+   * @returns {Promise<T>}
+   */
   post (url, params) {
     return this.prepareRequest('POST', url, params)
   }
 
+  /**
+   * @template T
+   * @param {string} url
+   * @param {object} params
+   * @returns {Promise<T>}
+   */
   patch (url, params) {
     return this.prepareRequest('PATCH', url, params)
   }
 
+  /**
+   * @template T
+   * @param {string} url
+   * @param {object} params
+   * @returns {Promise<T>}
+   */
   put (url, params) {
     return this.prepareRequest('PUT', url, params)
   }
 
+  /**
+   * @template T
+   * @param {string} url
+   * @param {object} params
+   * @returns {Promise<T>}
+   */
   delete (url, params) {
     return this.prepareRequest('DELETE', url, params)
   }
 
+  /**
+   * Prepare request
+   * @template T
+   * @param {string} method
+   * @param {string} url
+   * @param {object} params
+   * @returns {Promise<T>}
+   * @private
+   * @memberof RequestClient
+   */
   prepareRequest (method, url, params) {
     return fetch(`${this.baseUrl}${url}`, {
       method,

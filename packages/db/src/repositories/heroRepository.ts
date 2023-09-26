@@ -1,5 +1,5 @@
 import { HERO_NAMES } from '../constants.js'
-// @ts-ignore
+// TODO: fix type declaration
 import { getArrayRandom } from '@lilicas/utils'
 import { type Hero, type InsertHero } from '../models/Hero.js'
 import { connection, handleErrors } from '../connection.js'
@@ -9,7 +9,7 @@ import { type Guild } from '../models/Guild.js'
  * create a hero
  * @param id discord id
  * @param data hero data
- * @returns hero
+ * @returns hero | null
  */
 const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
   if (data.name === undefined) {
@@ -33,7 +33,7 @@ const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
       return hero
     }).catch(handleErrors)
 
-  if (!hero) {
+  if (hero === null) {
     return null
   }
 
@@ -43,9 +43,9 @@ const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
 /**
  * get or create a hero
  * @param id discord id
- * @returns hero[]
+ * @returns hero[] | null
  */
-const getOrCreate = async (id: string) => {
+const getOrCreate = async (id: string): Promise<Hero[] | null> => {
   const heros = await connection
     .transaction(async trx => {
       const guild = await trx('guilds')
@@ -67,7 +67,7 @@ const getOrCreate = async (id: string) => {
 
   const newHero = await create(id, { name: getArrayRandom(HERO_NAMES) })
 
-  if (!newHero) {
+  if (newHero === null) {
     return null
   }
 
@@ -78,9 +78,9 @@ const getOrCreate = async (id: string) => {
  * update a hero
  * @param id hero id
  * @param data hero partial data
- * @returns hero
+ * @returns hero | null
  */
-const update = async (id: string, data: InsertHero) => {
+const update = async (id: string, data: InsertHero): Promise<Hero | null> => {
   if (Object.keys(data).length === 0) {
     return null
   }
@@ -91,7 +91,7 @@ const update = async (id: string, data: InsertHero) => {
     .returning<Hero[]>('*')
     .catch(handleErrors)
 
-  if (!hero) {
+  if (hero === null) {
     return null
   }
 

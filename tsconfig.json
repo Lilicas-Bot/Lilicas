@@ -19,7 +19,10 @@
       "@lilicas/db": [
         "./packages/db/dist/index.js"
       ]
-    }
+    },
+    "typeRoots": [
+      "./packages/**/types/*.d.ts",
+    ]
   },
   "references": [
     { "path": "./packages/db" }
@@ -29,5 +32,5 @@
     "packages/mythos/**/*",
     "packages/db/migrations/**/*",
     "apps/**/*",
-  ]
+  ],
 }
