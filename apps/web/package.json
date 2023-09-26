@@ -1,5 +1,9 @@
 {
     "name": "@lilicas/web",
     "version": "1.0.0",
-    "type": "module"
+    "type": "module",
+    "scripts": {
+      "start": "echo \"Hello World\"",
+      "dev": "echo \"Hello World\""
+    }
 }
