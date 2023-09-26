@@ -16,6 +16,8 @@ export interface Guild {
   npcs: number
   npcs_max: number
   max_items: number
+  collected_at: number
+  max_work_time: number
 }
 
 export interface GuildItem {
