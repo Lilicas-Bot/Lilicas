@@ -5,7 +5,7 @@ const config: Record<string, Knex.Config> = {
     client: 'cockroachdb',
     connection: process.env.DATABASE_URI ?? {
       database: 'lilicas',
-      user: 'lilicas',
+      user: 'root',
       password: '',
       port: 26257
     },
