@@ -1,5 +1,6 @@
 import { HERO_NAMES } from '../constants.js'
 // TODO: fix type declaration
+// @ts-ignore
 import { getArrayRandom } from '@lilicas/utils'
 import { type Hero, type InsertHero } from '../models/Hero.js'
 import { connection, handleErrors } from '../connection.js'
