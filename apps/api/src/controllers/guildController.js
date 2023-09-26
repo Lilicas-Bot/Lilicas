@@ -12,7 +12,9 @@ const keys = Object.freeze([
   'xp',
   'npcs',
   'npcsMax',
-  'maxItens'
+  'maxItens',
+  'collected_at',
+  'max_work_time'
 ])
 
 const route = Router()
