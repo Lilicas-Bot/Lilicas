@@ -9,15 +9,15 @@ export default class Guild extends Command {
   }
 
   async run (interaction) {
-    const data = await this.client.db.guilds.get(interaction.member.id)
-    const heroes = data.heroes.reduce((acc, curr) => acc + Number(curr.available, 0))
+    const guild = await this.client.db.guilds.get(interaction.member.id)
+    const heroes = guild?.heroes?.reduce((acc, curr) => acc + Number(curr.available, 0))
 
     const now = Date.now()
     const oneHourInMs = (60 * 60 * 1000)
-    const collectedAt = data.collected_at || now - oneHourInMs
+    const collectedAt = guild.collected_at || now - oneHourInMs
 
-    const timePast = now - Math.min(collectedAt, (data.max_work_time * oneHourInMs))
-    const produced = calculateProduction(timePast, data.npcs, heroes)
+    const timePast = now - Math.min(collectedAt, (guild.max_work_time * oneHourInMs))
+    const produced = calculateProduction(timePast, guild.npcs, heroes)
 
     const fields = [
       {
