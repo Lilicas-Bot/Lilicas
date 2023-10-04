@@ -52,6 +52,7 @@ const calculateProduction = (timestamp, npcs, heroes) => {
  * @returns {number}
 */
 const ArithmeticProgressionSum = (firstTerm, secondTerm, commonDifference) => {
+  if (firstTerm === secondTerm) return firstTerm
   const numberOfTerms = Math.floor((secondTerm - firstTerm) / commonDifference) + 1
   return (numberOfTerms * (firstTerm + secondTerm)) / 2
 }

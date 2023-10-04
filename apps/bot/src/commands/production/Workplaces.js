@@ -21,7 +21,7 @@ export default class Workplaces extends Command {
   async run (interaction) {
     const guild = this.client.db.guilds.get(interaction.member.id)
     const quantity = interaction.data?.options?.quantidade || 1
-    const price = WORKPLACE_PRICE * ArithmeticProgressionSum(guild.npcs_max + 1, quantity, 1)
+    const price = WORKPLACE_PRICE * ArithmeticProgressionSum(guild.npcs_max + 1, guild.npcs_max + quantity, 1)
 
     if (guild.money < price) {
       return `${error} Sua Guilda não tem dinheiro suficiente para essa expansão!`
