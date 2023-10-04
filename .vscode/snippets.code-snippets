@@ -1,0 +1,19 @@
+{
+  "New Command": {
+    "scope": "javascript",
+    "prefix": "command",
+    "body": [
+      "import { Command } from '../../structures/index.js'",
+      "",
+      "export default class $TM_FILENAME_BASE extends Command {",
+      "  constructor (client) {",
+      "    super(client, '${TM_FILENAME_BASE/(.*)/${1:/downcase}/}', { description: '${2:command description}' })",
+      "  }"
+      "",
+      "  async run (interaction) {}",
+      "}",
+      ""
+    ],
+    "description": "Create New Command"
+  }
+}
