@@ -44,7 +44,20 @@ const calculateProduction = (timestamp, npcs, heroes) => {
   }
 }
 
+/**
+ * Calculate the sum of all terms in the arithmetic progression
+ * @params {number} firstTerm - First term of AP
+ * @params {number} secondTerm - Second term of AP
+ * @params {number} commonDifference - Common difference between the terms
+ * @returns {number}
+*/
+const ArithmeticProgressionSum = (firstTerm, secondTerm, commonDifference) => {
+  const numberOfTerms = Math.floor((secondTerm - firstTerm) / commonDifference) + 1
+  return (numberOfTerms * (firstTerm + secondTerm)) / 2
+}
+
 export {
   convertTime,
-  calculateProduction
+  calculateProduction,
+  ArithmeticProgressionSum
 }
