@@ -14,7 +14,7 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .first<Guild>()
     .catch(handleErrors)
 
-  if (query !== null) {
+  if (query !== null && query !== undefined) {
     return await update(id, data)
   }
 
@@ -27,7 +27,7 @@ const create = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .returning<Guild[]>('*')
     .catch(handleErrors)
 
-  if (guild === null) {
+  if (guild === null || guild === undefined) {
     return null
   }
 
@@ -47,7 +47,8 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
     .first<Guild>()
     .catch(handleErrors)
 
-  if (query !== null) {
+  if (query !== null && query !== undefined) {
+    console.log('found guild')
     return query
   }
 
@@ -62,7 +63,7 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
 const update = async (id: string, data: InsertGuild): Promise<Guild | null> => {
   const query = await getOrCreate(id)
 
-  if (query === null) {
+  if (query === null || query === undefined) {
     return null
   }
 
@@ -73,7 +74,7 @@ const update = async (id: string, data: InsertGuild): Promise<Guild | null> => {
     .returning<Guild[]>('*')
     .catch(handleErrors)
 
-  if (guild === null) {
+  if (guild === null || guild === undefined) {
     return null
   }
 

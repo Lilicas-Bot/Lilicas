@@ -13,7 +13,7 @@ import { type Guild } from '../models/Guild.js'
  * @returns hero | null
  */
 const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
-  if (data.name === undefined) {
+  if (data.name === undefined || data.name === null) {
     data.name = getArrayRandom(HERO_NAMES)
   }
 
@@ -34,7 +34,7 @@ const create = async (id: string, data: InsertHero): Promise<Hero | null> => {
       return hero
     }).catch(handleErrors)
 
-  if (hero === null) {
+  if (hero === null || hero === undefined) {
     return null
   }
 
@@ -68,7 +68,7 @@ const getOrCreate = async (id: string): Promise<Hero[] | null> => {
 
   const newHero = await create(id, { name: getArrayRandom(HERO_NAMES) })
 
-  if (newHero === null) {
+  if (newHero === null || newHero === undefined) {
     return null
   }
 
@@ -92,7 +92,7 @@ const update = async (id: string, data: InsertHero): Promise<Hero | null> => {
     .returning<Hero[]>('*')
     .catch(handleErrors)
 
-  if (hero === null) {
+  if (hero === null || hero === undefined) {
     return null
   }
 

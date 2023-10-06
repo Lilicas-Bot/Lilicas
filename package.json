@@ -13,7 +13,7 @@
     "compose:prod": "docker compose --profile production up -d --build",
     "lint": "eslint ./apps ./packages",
     "lint:fix": "eslint --fix ./apps ./packages",
-    "dev": "yarn compose:dev && concurrently --kill-others-on-fail -n api,bot,web \"yarn workspace @lilicas/api dev\" \"yarn workspace @lilicas/bot dev\" \"yarn workspace @lilicas/web dev\""
+    "dev": "yarn db:gen && yarn compose:dev && concurrently --kill-others-on-fail -n api,bot,web \"yarn workspace @lilicas/api dev\" \"yarn workspace @lilicas/bot dev\" \"yarn workspace @lilicas/web dev\""
   },
   "workspaces": [
     "apps/*",
