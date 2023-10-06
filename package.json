@@ -7,8 +7,8 @@
   "license": "MPL-2.0",
   "scripts": {
     "db:gen": "yarn workspace @lilicas/db build",
-    "db:deploy": "cross-env NODE_OPTIONS='--loader ts-node/esm' yarn workspace @lilicas/db knex migrate:latest --env main",
-    "db:migrate:redo": "cross-env NODE_OPTIONS='--loader ts-node/esm' yarn workspace @lilicas/db knex migrate:down --env main && NODE_OPTIONS='--loader ts-node/esm' yarn workspace @lilicas/db knex migrate:up --env main",
+    "db:deploy": "yarn workspace @lilicas/db db:deploy",
+    "db:migrate:redo": "yarn workspace @lilicas/db db:migrate:redo",
     "compose:dev": "docker compose --profile dev up -d",
     "compose:prod": "docker compose --profile production up -d --build",
     "lint": "eslint ./apps ./packages",
@@ -23,7 +23,6 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "concurrently": "^8.2.1",
-    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.1.0",
@@ -31,8 +30,7 @@
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.1.1",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1"
+    "nodemon": "^3.0.1"
   },
   "dependencies": {}
 }
