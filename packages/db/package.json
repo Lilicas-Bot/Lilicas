@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@lilicas/utils": "*",
+    "@types/pg": "^8.10.3",
     "cross-env": "^7.0.3",
     "knex": "^2.5.1",
     "pg": "^8.11.3",

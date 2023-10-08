@@ -48,7 +48,6 @@ const getOrCreate = async (id: string): Promise<Guild | null> => {
     .catch(handleErrors)
 
   if (query !== null && query !== undefined) {
-    console.log('found guild')
     return query
   }
 
