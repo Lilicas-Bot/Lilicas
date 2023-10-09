@@ -7,10 +7,9 @@ import { MONEY_MULTIPLIER, HERO_PORCENTAGE } from './Constants.js'
  */
 const convertTime = (timestamp) => {
   return {
-    timestamp,
-    hours: () => Math.floor(this.timestamp / 3600000),
-    minutes: () => Math.floor((this.timestamp % 3600000) / 60000),
-    seconds: () => Math.floor(((this.timestamp % 3600000) % 60000) / 1000)
+    hours: Math.floor(timestamp / 3600000),
+    minutes: Math.floor((timestamp % 3600000) / 60000),
+    seconds: Math.floor(((timestamp % 3600000) % 60000) / 1000)
   }
 }
 
@@ -26,8 +25,8 @@ const calculateProduction = (timestamp, npcs, heroes) => {
   const heroGeneration = heroes * (MONEY_MULTIPLIER * HERO_PORCENTAGE)
 
   const time = convertTime(timestamp)
-  const hours = time.hours()
-  const minutes = time.minutes()
+  const hours = time.hours
+  const minutes = time.minutes
 
   const npcProducedByHour = generation * hours
   const npcProducedByMin = (generation / 60) * minutes

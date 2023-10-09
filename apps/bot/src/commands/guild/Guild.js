@@ -11,7 +11,7 @@ export default class Guild extends Command {
 
   async run (interaction) {
     const guild = await this.client.db.guilds.get(interaction.member.id)
-    const heroes = guild?.heroes?.reduce((acc, curr) => acc + Number(curr.available, 0))
+    const heroes = guild?.heroes?.reduce((acc, curr) => acc + Number(curr.available, 0)) || 0
 
     const now = Date.now()
     const oneHourInMs = 60 * 60 * 1000
@@ -38,7 +38,7 @@ export default class Guild extends Command {
       },
       {
         name: `${member} Membros`,
-        value: `**${guild.npcs}/${guild.npcsMax}**`,
+        value: `**${guild.npcs}/${guild.npcs_max}**`,
         inline: true
       },
       {
